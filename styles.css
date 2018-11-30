@@ -29,9 +29,10 @@ body {
 
 .controls {
   min-width: 400px;
-  padding: 10px;
-  background: #111111;
-  color: #dddddd;
+  padding: 10px 20px;
+  background: #222222;
+  color: #eeeeee;
+  border-left: 1px solid #aaaaaa;
 }
 
 .cube_controls {
