@@ -28,6 +28,7 @@ body {
 }
 
 .controls {
+  flex-direction: column;
   min-width: 400px;
   padding: 10px 20px;
   background: #222222;
@@ -35,21 +36,43 @@ body {
   border-left: 1px solid #aaaaaa;
 }
 
-.cube_controls {
+.control {
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 20px;
+}
+
+.cone_controls,
+.cube_controls,
+.cylinder_controls,
+.dodecahedron_controls,
+.icosahedron_controls,
+.octahedron_controls {
   flex-direction: column;
 }
 
-.cube_control {
+.cone_control,
+.cube_control,
+.cylinder_control,
+.dodecahedron_control,
+.icosahedron_control,
+.octahedron_control {
   margin: 5px 0;
 }
 
-.cube_visibility_label {
+.cone_visibility_checkbox,
+.cube_visibility_checkbox,
+.cylinder_visibility_checkbox,
+.dodecahedron_visibility_checkbox,
+.icosahedron_visibility_checkbox,
+.octahedron_visibility_checkbox {
+  margin: 0 5px 0 0;
 }
 
-.cube_visibility_checkbox {
-  margin-right: 5px;
-}
-
-.cube_color_label {
+.cone_color_label,
+.cube_color_label,
+.cylinder_color_label,
+.dodecahedron_color_label,
+.icosahedron_color_label,
+.octahedron_color_label {
   margin-right: 5px;
 }

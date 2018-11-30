@@ -2,6 +2,7 @@ import * as THREE from "three"
 import { State } from "./state/reducer"
 import * as Shapes from "./shapes"
 import { div } from "./elements"
+import { anyVisible } from "./state/reducer"
 
 interface Canvas {
   domElement: Element
@@ -64,21 +65,23 @@ const animate = (props: AnimateProps) => {
 const Canvas = (state: State) => {
   // Shapes
   const shapes: Shapes = {
-    cone: Shapes.Cone.from(new THREE.MeshLambertMaterial({ color: 0xffff00 })),
+    cone: Shapes.Cone.from(
+      new THREE.MeshLambertMaterial({ color: state.cone.color })
+    ),
     cube: Shapes.Cube.from(
       new THREE.MeshLambertMaterial({ color: state.cube.color })
     ),
     cylinder: Shapes.Cylinder.from(
-      new THREE.MeshLambertMaterial({ color: 0xffff00 })
+      new THREE.MeshLambertMaterial({ color: state.cylinder.color })
     ),
     dodecahedron: Shapes.Dodecahedron.from(
-      new THREE.MeshLambertMaterial({ color: 0xffff00 })
+      new THREE.MeshLambertMaterial({ color: state.dodecahedron.color })
     ),
     icosahedron: Shapes.Icosahedron.from(
-      new THREE.MeshLambertMaterial({ color: 0xffff00 })
+      new THREE.MeshLambertMaterial({ color: state.icosahedron.color })
     ),
     octahedron: Shapes.Octahedron.from(
-      new THREE.MeshLambertMaterial({ color: 0xffff00 })
+      new THREE.MeshLambertMaterial({ color: state.octahedron.color })
     )
   }
 
@@ -111,14 +114,6 @@ const Canvas = (state: State) => {
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5)
   scene.add(ambientLight)
 
-  // const pointLight = new THREE.PointLight(0xffffff, 2.0, 600)
-  // pointLight.position.set(50, 50, 50)
-  // scene.add(pointLight)
-
-  // const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0)
-  // directionalLight.target = cube
-  // scene.add(directionalLight)
-
   const spotlight = new THREE.SpotLight(0xffffff, 4.0, 3000)
   spotlight.position.y = 100
   spotlight.target = shapes.cube
@@ -131,8 +126,14 @@ const Canvas = (state: State) => {
   shapes.icosahedron.position.set(0, -3, 0)
   shapes.octahedron.position.set(10, -3, 0)
 
-  if (state.cube.isVisible) {
-    scene.add(...Object.values(shapes))
+  state.cone.isVisible && scene.add(shapes.cone)
+  state.cube.isVisible && scene.add(shapes.cube)
+  state.cylinder.isVisible && scene.add(shapes.cylinder)
+  state.dodecahedron.isVisible && scene.add(shapes.dodecahedron)
+  state.icosahedron.isVisible && scene.add(shapes.icosahedron)
+  state.octahedron.isVisible && scene.add(shapes.octahedron)
+
+  if (anyVisible(state)) {
     animate({ camera, canvas, renderer, scene, shapes })
   }
 

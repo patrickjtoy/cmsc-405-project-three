@@ -10,7 +10,7 @@ const padColor = (hex: string): string => {
 }
 
 const CubeControls = (state: State) => (dispatch: Dispatch) => {
-  return div({ className: "cube_controls" })([
+  return div({ classList: ["control", "cube_controls"] })([
     heading({ size: 3 })([text("Cube")]),
     label({
       classList: ["cube_control", "cube_visibility_label"]
